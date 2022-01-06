@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/marcosjav/animated_switch/blob/main/img/switch.gif?raw=true" height="250" alt="Animated switch" />
+<img src="https://github.com/marcosjav/animated_switch/blob/master/img/switch.gif?raw=true" height="50" alt="Animated switch" />
 </p>
 
 ---
@@ -72,4 +72,4 @@ AnimatedSwitch(
 
 ## Previews
 
-![](https://github.com/marcosjav/animated_switch/blob/main/img/example.gif?raw=true)
+![](https://github.com/marcosjav/animated_switch/blob/master/img/example.gif?raw=true)
