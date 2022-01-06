@@ -21,7 +21,10 @@ Import this library into your project:
 animated_switch: ^latest_version
 ```
 
-
+Or do:
+```console
+$ flutter pub add animated_switch
+```
 
 ## Basic Implementation
 
