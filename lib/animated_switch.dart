@@ -69,8 +69,7 @@ class AnimatedSwitch extends StatefulWidget {
   AnimatedSwitchState createState() => AnimatedSwitchState();
 }
 
-class AnimatedSwitchState extends State<AnimatedSwitch>
-    with SingleTickerProviderStateMixin {
+class AnimatedSwitchState extends State<AnimatedSwitch> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   Animation<double>? _animation;
   double _animationValue = 0.0;
@@ -94,20 +93,15 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
 
   @override
   void initState() {
-    _animationController = AnimationController(
-        vsync: this,
-        lowerBound: 0.0,
-        upperBound: 1.0,
-        duration: widget.animationDuration);
-    _animation =
-        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+    _animationController = AnimationController(vsync: this, lowerBound: 0.0, upperBound: 1.0, duration: widget.animationDuration);
+    _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
     _animationController.addListener(() {
       setState(() {
         if (_animation != null) _animationValue = _animation!.value;
       });
     });
     value = widget.value;
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _setSwitchState();
     });
     super.initState();
@@ -116,15 +110,10 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
   @override
   void didChangeDependencies() {
     // Setting sizes
-    final TextStyle? textStyle =
-        widget.textStyle ?? DefaultTextStyle.of(context).style;
+    final TextStyle? textStyle = widget.textStyle ?? DefaultTextStyle.of(context).style;
     final double textHeight = textStyle?.fontSize ?? _defaultHeight;
-    _height = (widget.height != null && widget.height! > textHeight)
-        ? widget.height!
-        : textHeight * 1.5;
-    _width = (widget.width != null && widget.width! > _height)
-        ? widget.width!
-        : _height * 2.5;
+    _height = (widget.height != null && widget.height! > textHeight) ? widget.height! : textHeight * 1.5;
+    _width = (widget.width != null && widget.width! > _height) ? widget.width! : _height * 2.5;
     _borderRadius = _height / 2;
     _textHorizontalPadding = _height / 10;
     _textWidth = _width - _height;
@@ -134,8 +123,7 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
 
   @override
   Widget build(BuildContext context) {
-    Color? transitionColor =
-        Color.lerp(widget.colorOff, widget.colorOn, _animationValue);
+    Color? transitionColor = Color.lerp(widget.colorOff, widget.colorOn, _animationValue);
 
     final double opacityOff = 1 - _animationValue;
     final double opacityOn = _animationValue;
@@ -147,20 +135,11 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
         height: _height - 2,
         width: _height - 2,
         alignment: Alignment.center,
-        decoration:
-            BoxDecoration(shape: BoxShape.circle, color: widget.indicatorColor),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: widget.indicatorColor),
         child: Stack(
           children: [
-            if (widget.iconOff != null)
-              _buildIconWidget(
-                  icon: widget.iconOff!,
-                  opacity: opacityOn,
-                  color: transitionColor),
-            if (widget.iconOn != null)
-              _buildIconWidget(
-                  icon: widget.iconOn!,
-                  opacity: opacityOff,
-                  color: transitionColor),
+            if (widget.iconOff != null) _buildIconWidget(icon: widget.iconOff!, opacity: opacityOn, color: transitionColor),
+            if (widget.iconOn != null) _buildIconWidget(icon: widget.iconOn!, opacity: opacityOff, color: transitionColor),
           ],
         ),
       );
@@ -170,8 +149,7 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
       height: _height - 2,
       width: _height - 2,
       alignment: Alignment.center,
-      decoration:
-          BoxDecoration(shape: BoxShape.circle, color: widget.indicatorColor),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: widget.indicatorColor),
       child: icons,
     );
 
@@ -200,23 +178,11 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
           padding: const EdgeInsets.all(1),
           width: _width,
           height: _height,
-          decoration: BoxDecoration(
-              color: transitionColor,
-              borderRadius: BorderRadius.circular(_borderRadius)),
+          decoration: BoxDecoration(color: transitionColor, borderRadius: BorderRadius.circular(_borderRadius)),
           child: Stack(
             children: [
-              if (widget.textOff != null)
-                _buildTextWidget(
-                    right: true,
-                    opacity: opacityOff,
-                    offset: _animationValue,
-                    text: widget.textOff!),
-              if (widget.textOn != null)
-                _buildTextWidget(
-                    right: false,
-                    opacity: opacityOn,
-                    offset: 1 - _animationValue,
-                    text: widget.textOn!),
+              if (widget.textOff != null) _buildTextWidget(right: true, opacity: opacityOff, offset: _animationValue, text: widget.textOff!),
+              if (widget.textOn != null) _buildTextWidget(right: false, opacity: opacityOn, offset: 1 - _animationValue, text: widget.textOn!),
               Positioned(
                 left: (_textWidth) * _animationValue,
                 child: indicator,
@@ -229,23 +195,16 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
   }
 
   // Building widgets
-  Widget _buildIconWidget(
-          {required IconData icon, required double opacity, Color? color}) =>
-      Center(
-          child: Opacity(
-              opacity: opacity,
-              child: Icon(
-                icon,
-                size: _iconSize,
-                color: color,
-              )));
+  Widget _buildIconWidget({required IconData icon, required double opacity, Color? color}) => Center(
+      child: Opacity(
+          opacity: opacity,
+          child: Icon(
+            icon,
+            size: _iconSize,
+            color: color,
+          )));
 
-  Widget _buildTextWidget(
-          {required bool right,
-          required double opacity,
-          required double offset,
-          required String text}) =>
-      Positioned(
+  Widget _buildTextWidget({required bool right, required double opacity, required double offset, required String text}) => Positioned(
         right: right ? 0 : null,
         left: right ? null : 0,
         top: 0,
