@@ -1,3 +1,7 @@
+## [0.0.3] - Update status
+
+* Update switch status with new value (thanks [Mohamed Ahmed](https://github.com/14mohamedahmed))
+
 ## [0.0.2] - Cleaning
 
 * Cleanning code

@@ -1,6 +1,6 @@
 name: animated_switch
 description: Custom animated swith - You can customize and animate the color, text and choose different status icons
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/marcosjav/animated_switch
 
 environment:
