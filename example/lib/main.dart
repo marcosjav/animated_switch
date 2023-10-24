@@ -33,6 +33,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _value = false;
 
+  onChange() {
+    print(_value);
+    setState(() {
+      _value = !_value;
+    });
+    print(_value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            TextButton(
+              onPressed: () {
+                onChange();
+              },
+              child: const Text("ON CHANGE"),
+            ),
             const Text("Simple:"),
             const SizedBox(height: 10),
             // Simple animated Switch
@@ -61,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10),
             // with callback action
             AnimatedSwitch(
+              value: _value,
               onChanged: (value) {
                 setState(() {
                   _value = value;

@@ -1,8 +1,9 @@
 library animated_switch;
 
-import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'dart:math';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 /// Customable and attractive Switch button.
 /// You can change the widget
@@ -90,6 +91,16 @@ class AnimatedSwitchState extends State<AnimatedSwitch>
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant AnimatedSwitch oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.value != widget.value) {
+      (widget.value)
+          ? _animationController.forward()
+          : _animationController.reverse();
+    }
   }
 
   @override
